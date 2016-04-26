@@ -20,6 +20,9 @@ class ProjectLoader
         $this->configFile = new ConfigFile($filepath);
     }
 
+    /**
+     * @param  CommandContext $context
+     */
     public function load(CommandContext $context)
     {
         $translationPaths = $this->configFile->getTranslationPaths();
@@ -32,6 +35,11 @@ class ProjectLoader
 
     }
 
+
+    /**
+     * @param  CommandContext $context
+     * @return array
+     */
     public function loadPath(CommandContext $context)
     {
 

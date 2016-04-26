@@ -11,7 +11,7 @@
         "symfony/event-dispatcher": "^2.7|^3.0",
         "symfony/property-access": "^2.7|^3.0",
         "stichoza/google-translate-php": "^3.1"
-    }
+    },
     "bin": [
         "bin/tanslala"
     ],
