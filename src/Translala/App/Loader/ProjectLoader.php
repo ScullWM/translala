@@ -5,7 +5,7 @@ namespace Translala\App\Loader;
 use Translala\Domain\Model\CommandContext;
 use Translala\Domain\Model\ConfigFile;
 
-class ProjectLoader
+class ProjectLoader implements LoaderInterface
 {
     /**
      * @var ConfigFileInterface
@@ -34,7 +34,6 @@ class ProjectLoader
 
 
     }
-
 
     /**
      * @param  CommandContext $context

@@ -3,15 +3,10 @@
 namespace Translala\Domain\Model;
 
 use Symfony\Component\Yaml\Parser;
+use Translala\Domain\Model\ConfigFileInterface;
 
 class ConfigFile implements ConfigFileInteface
 {
-    const PATHS_KEY         = 'paths';
-    const MASTER_LOCALE_KEY = 'master_language';
-    const LANGUAGES_KEY     = 'languages';
-    const EXPORT_PATH_KEY   = 'export_path';
-
-
     /**
      * @var string
      */
@@ -54,7 +49,7 @@ class ConfigFile implements ConfigFileInteface
      */
     public function getTranslationPaths()
     {
-        return $this->data[self::PATHS_KEY];
+        return $this->data[ConfigFileInterface::PATHS_KEY];
     }
 
     /**
@@ -62,7 +57,7 @@ class ConfigFile implements ConfigFileInteface
      */
     public function getMasterLocale()
     {
-        return $this->data[self::MASTER_LOCALE_KEY];
+        return $this->data[ConfigFileInterface::MASTER_LOCALE_KEY];
     }
 
     /**
@@ -70,7 +65,7 @@ class ConfigFile implements ConfigFileInteface
      */
     public function getLanguages()
     {
-        return $this->data[self::LANGUAGES_KEY];
+        return $this->data[ConfigFileInterface::LANGUAGES_KEY];
     }
 
     /**
@@ -78,6 +73,6 @@ class ConfigFile implements ConfigFileInteface
      */
     public function getExportPath()
     {
-        return $this->data[self::EXPORT_PATH_KEY];
+        return $this->data[ConfigFileInterface::EXPORT_PATH_KEY];
     }
 }

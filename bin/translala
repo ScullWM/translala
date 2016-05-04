@@ -16,7 +16,7 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use Mmoreram\TranslationServer\Console\Application;
+use Symfony\Component\Console\Application\Application;
 
 error_reporting(-1);
 ini_set('display_errors', 1);
