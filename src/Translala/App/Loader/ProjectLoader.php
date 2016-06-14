@@ -13,6 +13,11 @@ class ProjectLoader implements LoaderInterface
     private $configFile;
 
     /**
+     * @var array
+     */
+    private $translationsFiles = [];
+
+    /**
      * @param string $filepath
      */
     public function __construct($filepath)
@@ -27,20 +32,26 @@ class ProjectLoader implements LoaderInterface
     {
         $translationPaths = $this->configFile->getTranslationPaths();
 
-        $filespath = [];
         foreach ($translationPaths as $path) {
-            $filespath[] = $this->loadPath($context);
+            $this->loadPath($context, $path);
         }
-
-
     }
 
     /**
      * @param  CommandContext $context
+     * @param  string $path
      * @return array
      */
-    public function loadPath(CommandContext $context)
+    public function loadPath(CommandContext $context, $path)
     {
+        $this->translationsFiles[] = new TranslationFile($path);
+    }
 
+    /**
+     * @return array
+     */
+    public function getTranslationFiles()
+    {
+        return $this->translationsFiles;
     }
 }

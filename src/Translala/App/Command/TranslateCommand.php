@@ -4,6 +4,7 @@ namespace Translala\App\Command;
 
 use Translala\App\Command\AbstractCommand;
 use Translala\App\Loader\ProjectLoader;
+use Translala\Infra\Job\TranslateJob;
 
 class TranslateCommand extends AbstractCommand
 {
@@ -21,5 +22,8 @@ class TranslateCommand extends AbstractCommand
     {
         $projectLoader = new ProjectLoader($input->getOption('path'));
         $projectLoader->load(new CommandContext($input->getOption('domain'), $input->getOption('locale')));
+
+        $job = new TranslateJob($projectLoader->getTranslationFiles());
+        $job->process();
     }
 }
