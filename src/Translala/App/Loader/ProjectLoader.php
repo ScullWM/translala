@@ -4,6 +4,8 @@ namespace Translala\App\Loader;
 
 use Translala\Domain\Model\CommandContext;
 use Translala\Domain\Model\ConfigFile;
+use Translala\Domain\Model\TranslationFile;
+use Translala\Infra\Parser\FileParser;
 
 class ProjectLoader implements LoaderInterface
 {
@@ -33,18 +35,13 @@ class ProjectLoader implements LoaderInterface
         $translationPaths = $this->configFile->getTranslationPaths();
 
         foreach ($translationPaths as $path) {
-            $this->loadPath($context, $path);
-        }
-    }
+            foreach (glob($path . '*.' . $this->configFile->getMasterLocale() . '.yml') as $translationFile) {
 
-    /**
-     * @param  CommandContext $context
-     * @param  string $path
-     * @return array
-     */
-    public function loadPath(CommandContext $context, $path)
-    {
-        $this->translationsFiles[] = new TranslationFile($path);
+                $translationFileModel = new TranslationFile($translationFile, new FileParser($translationFile));
+                $translationFileModel->parse();
+                $this->translationsFiles[] = $translationFileModel;
+            }
+        }
     }
 
     /**

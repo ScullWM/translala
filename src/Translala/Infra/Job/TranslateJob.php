@@ -4,10 +4,24 @@ namespace Translala\Infra\Job;
 
 class TranslateJob
 {
-    public function process(array $translationsFiles)
+    /**
+     * @var array
+     */
+    private $translationsFiles;
+
+    /**
+     * @param array $translationsFiles
+     */
+    public function __construct(array $translationsFiles)
     {
-        foreach ($translationsFiles as $translation) {
+        $this->translationsFiles = $translationsFiles;
+    }
+
+    public function process()
+    {
+        foreach ($this->translationsFiles as $translation) {
             # code...
+            // echo '-';
         }
     }
 }

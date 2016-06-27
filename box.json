@@ -1,0 +1,35 @@
+{
+    "algorithm": "SHA1",
+    "alias": "translala.phar",
+    "banner": "",
+    "chmod": "0755",
+    "compactors": [
+        "Herrera\\Box\\Compactor\\Json",
+        "Herrera\\Box\\Compactor\\Php"
+    ],
+    "directories": "src",
+    "extract": true,
+    "files": [
+        "vendor/autoload.php",
+        "vendor/composer/installed.json"
+    ],
+    "finder": [
+        {
+            "exclude": [
+                "tests",
+                "Tests"
+            ],
+            "in": [
+                "vendor",
+                "vendor/guzzlehttp",
+                "vendor/stichoza",
+                "vendor/symfony"
+            ],
+            "name": "*.php"
+        }
+    ],
+    "git-version": "package_version",
+    "main": "bin/translala",
+    "output": "build/translala.phar",
+    "stub": true
+}

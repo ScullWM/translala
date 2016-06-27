@@ -5,7 +5,7 @@ namespace Translala\Domain\Model;
 use Symfony\Component\Yaml\Parser;
 use Translala\Domain\Model\ConfigFileInterface;
 
-class ConfigFile implements ConfigFileInteface
+class ConfigFile implements ConfigFileInterface
 {
     /**
      * @var string

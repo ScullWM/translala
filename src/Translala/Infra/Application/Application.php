@@ -9,7 +9,7 @@ class Application extends BaseApplication
     protected function getDefaultCommands()
     {
         $commands = parent::getDefaultCommands();
-        $commands[] = new Translala\App\Command\TranslateCommand();
+        $commands[] = new \Translala\App\Command\TranslateCommand();
 
         return $commands;
     }

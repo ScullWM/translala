@@ -3,6 +3,7 @@
 namespace Translala\App\Command;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputOption;
 
 abstract class AbstractCommand extends Command
 {

@@ -2,8 +2,11 @@
 
 namespace Translala\App\Command;
 
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 use Translala\App\Command\AbstractCommand;
 use Translala\App\Loader\ProjectLoader;
+use Translala\Domain\Model\CommandContext;
 use Translala\Infra\Job\TranslateJob;
 
 class TranslateCommand extends AbstractCommand
@@ -20,8 +23,8 @@ class TranslateCommand extends AbstractCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $projectLoader = new ProjectLoader($input->getOption('path'));
-        $projectLoader->load(new CommandContext($input->getOption('domain'), $input->getOption('locale')));
+        $projectLoader = new ProjectLoader($input->getOption('config'));
+        $projectLoader->load(new CommandContext($input->getOption('domain'), $input->getOption('language')));
 
         $job = new TranslateJob($projectLoader->getTranslationFiles());
         $job->process();
