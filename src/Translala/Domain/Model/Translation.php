@@ -77,4 +77,18 @@ class Translation implements TranslationInterface
     {
         return $this->domain;
     }
+
+
+    /**
+     * @return array
+     */
+    public function getKeypath()
+    {
+        $array = [];
+        foreach (array_reverse(explode('.', $this->key)) as $arr) {
+            $array = [$arr => $array];
+        }
+
+        return $array;
+    }
 }

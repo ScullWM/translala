@@ -48,6 +48,6 @@ class TranslationFile implements TranslationFileInterface
      */
     public function getTranslations()
     {
-        return $this->translations;
+        return $this->fileParser->getTranslations();
     }
 }

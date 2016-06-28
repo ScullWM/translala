@@ -30,6 +30,11 @@ class FileParser
     /**
      * @var array
      */
+    private $keypath;
+
+    /**
+     * @var array
+     */
     private $translations = [];
 
     /**
@@ -60,14 +65,24 @@ class FileParser
     /**
      * @param  array $datas
      */
-    private function loadTranslationData($datas)
+    private function loadTranslationData($datas, $prefix = null)
     {
         foreach ($datas as $key => $value) {
             if (is_array($value)) {
-                $this->loadTranslationData($value);
+                $prefix = trim($prefix . '.' . $key, '.');
+                $this->loadTranslationData($value, $prefix);
             } else {
+                $key = $prefix . '.' . $key;
                 $this->translations[] = new Translation($key, $value, $this->language, $this->domain);
             }
         }
+    }
+
+    /**
+     * @return array<TranslationInterface>
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
     }
 }
