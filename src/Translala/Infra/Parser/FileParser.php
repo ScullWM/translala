@@ -67,7 +67,6 @@ class FileParser
                 $this->loadTranslationData($value);
             } else {
                 $this->translations[] = new Translation($key, $value, $this->language, $this->domain);
-                echo '-';
             }
         }
     }

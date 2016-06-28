@@ -37,4 +37,17 @@ class TranslationFile implements TranslationFileInterface
     {
         $this->fileParser->parse();
     }
+
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @return array<TranslationInterface>
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
 }

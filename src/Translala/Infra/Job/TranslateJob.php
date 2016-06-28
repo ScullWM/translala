@@ -19,9 +19,12 @@ class TranslateJob
 
     public function process()
     {
-        foreach ($this->translationsFiles as $translation) {
-            # code...
-            // echo '-';
+        foreach ($this->translationsFiles as $translationFile) {
+            echo $translationFile->getPath();
+            foreach ($translationFile->getTranslations() as $translation) {
+                // echo $translation->getKey();
+                echo '-';
+            }
         }
     }
 }
