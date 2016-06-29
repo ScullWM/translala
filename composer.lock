@@ -229,16 +229,16 @@
         },
         {
             "name": "stichoza/google-translate-php",
-            "version": "v3.2.7",
+            "version": "v3.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Stichoza/google-translate-php.git",
-                "reference": "c36f6e7b5e2ede343617d318b07b5ad9391f24d7"
+                "reference": "0e07828824c46f1bfd1822d824cf805211bf98a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Stichoza/google-translate-php/zipball/c36f6e7b5e2ede343617d318b07b5ad9391f24d7",
-                "reference": "c36f6e7b5e2ede343617d318b07b5ad9391f24d7",
+                "url": "https://api.github.com/repos/Stichoza/google-translate-php/zipball/0e07828824c46f1bfd1822d824cf805211bf98a9",
+                "reference": "0e07828824c46f1bfd1822d824cf805211bf98a9",
                 "shasum": ""
             },
             "require": {
@@ -274,7 +274,7 @@
                 "php",
                 "translate"
             ],
-            "time": "2016-02-18 07:52:23"
+            "time": "2016-05-16 08:35:53"
         },
         {
             "name": "symfony/console",
