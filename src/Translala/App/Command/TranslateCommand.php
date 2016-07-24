@@ -26,7 +26,7 @@ class TranslateCommand extends AbstractCommand
         $projectLoader = new ProjectLoader($input->getOption('config'));
         $projectLoader->load(new CommandContext($input->getOption('domain'), $input->getOption('language')));
 
-        $job = new TranslateJob($projectLoader->getTranslationFiles());
+        $job = new TranslateJob($projectLoader->getTranslationFiles(), $projectLoader->getConfig());
         $job->process();
     }
 }

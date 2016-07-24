@@ -51,4 +51,12 @@ class ProjectLoader implements LoaderInterface
     {
         return $this->translationsFiles;
     }
+
+    /**
+     * @return ConfigFileInterface
+     */
+    public function getConfig()
+    {
+        return $this->configFile;
+    }
 }
