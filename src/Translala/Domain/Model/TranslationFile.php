@@ -50,4 +50,9 @@ class TranslationFile implements TranslationFileInterface
     {
         return $this->fileParser->getTranslations();
     }
+
+    public function createFileForLocale($locale)
+    {
+
+    }
 }

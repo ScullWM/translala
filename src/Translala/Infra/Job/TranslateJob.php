@@ -4,6 +4,7 @@ namespace Translala\Infra\Job;
 
 use Stichoza\GoogleTranslate\TranslateClient;
 use Translala\Domain\Model\ConfigFileInterface;
+use Translala\Domain\Model\TranslationFileInterface;
 
 class TranslateJob
 {
@@ -32,15 +33,20 @@ class TranslateJob
         $masterLocale = $this->configFile->getMasterLocale();
 
         foreach ($this->translationsFiles as $translationFile) {
-
-
-            foreach ($translationFile->getTranslations() as $translation) {
-                $tr->setSource($masterLocale)->setTarget('ka')->translate('Goodbye');
-
-
-                var_dump($translation->getKeypath());
-                exit();
+            foreach ($this->configFile->getLanguages() as $locale) {
+                $this->translateFile($translationFile, $locale);
             }
+        }
+    }
+
+    private function translateFile(TranslationFileInterface $translationFile, $locale)
+    {
+        foreach ($translationFile->getTranslations() as $translation) {
+            $tr->setSource($masterLocale)->setTarget('ka')->translate('Goodbye');
+
+
+            var_dump($translation->getKeypath());
+            exit();
         }
     }
 }

@@ -62,6 +62,12 @@ class FileParser
         return $this->translations;
     }
 
+    public function dump($datas)
+    {
+        $yamlParser  = new Yaml();
+        $yamlContent = $yamlParser->dump($datas, 100);
+    }
+
     /**
      * @param  array $datas
      */
