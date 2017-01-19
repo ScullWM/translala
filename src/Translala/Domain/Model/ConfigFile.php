@@ -75,4 +75,12 @@ class ConfigFile implements ConfigFileInterface
     {
         return $this->data[ConfigFileInterface::EXPORT_PATH_KEY];
     }
+
+    /**
+     * @return array
+     */
+    public function getApiKey()
+    {
+        return $this->data[ConfigFileInterface::API_KEY];
+    }
 }

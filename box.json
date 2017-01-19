@@ -22,7 +22,9 @@
             "in": [
                 "vendor",
                 "vendor/guzzlehttp",
-                "vendor/stichoza",
+                "vendor/php-http",
+                "vendor/php-translation",
+                "vendor/psr",
                 "vendor/symfony"
             ],
             "name": "*.php"

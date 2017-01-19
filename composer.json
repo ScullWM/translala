@@ -10,7 +10,9 @@
         "symfony/yaml": "^2.7|^3.0",
         "symfony/event-dispatcher": "^2.7|^3.0",
         "symfony/property-access": "^2.7|^3.0",
-        "stichoza/google-translate-php": "^3.2"
+        "php-http/guzzle6-adapter": "^1.1",
+        "php-translation/translator": "^0.1.0",
+        "php-http/discovery": "^1.1"
     },
     "bin": [
         "bin/tanslala"

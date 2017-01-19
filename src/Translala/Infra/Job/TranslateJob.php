@@ -2,9 +2,10 @@
 
 namespace Translala\Infra\Job;
 
-use Stichoza\GoogleTranslate\TranslateClient;
 use Translala\Domain\Model\ConfigFileInterface;
 use Translala\Domain\Model\TranslationFileInterface;
+use Translation\Translator\Service\GoogleTranslator;
+use Translation\Translator\Translator;
 
 class TranslateJob
 {
@@ -19,6 +20,11 @@ class TranslateJob
     private $configFile;
 
     /**
+     * @var TranslatorService
+     */
+    private $translationClient;
+
+    /**
      * @param array $translationsFiles
      */
     public function __construct(array $translationsFiles, ConfigFileInterface $configFile)
@@ -29,7 +35,14 @@ class TranslateJob
 
     public function process()
     {
-        $tr = new TranslateClient();
+        $apiKeys = $this->configFile->getApiKey();
+
+        if (!isset($apiKeys['google'])) {
+            throw new \Exception("GoogleTranslator api key is missing");
+        }
+
+        $this->translationClient = new Translator();
+        $this->translationClient->addTranslatorService(new GoogleTranslator($apiKeys['google']));
         $masterLocale = $this->configFile->getMasterLocale();
 
         foreach ($this->translationsFiles as $translationFile) {
@@ -42,10 +55,9 @@ class TranslateJob
     private function translateFile(TranslationFileInterface $translationFile, $locale)
     {
         foreach ($translationFile->getTranslations() as $translation) {
-            $tr->setSource($masterLocale)->setTarget('ka')->translate('Goodbye');
 
-
-            var_dump($translation->getKeypath());
+            $translationString = $this->translationClient->translate($translation->getValue(), $translation->getLanguage(), $locale);
+            var_dump($translationString);
             exit();
         }
     }
