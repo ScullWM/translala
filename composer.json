@@ -12,7 +12,8 @@
         "symfony/property-access": "^2.7|^3.0",
         "php-http/guzzle6-adapter": "^1.1",
         "php-translation/translator": "^0.1.0",
-        "php-http/discovery": "^1.1"
+        "php-http/discovery": "^1.1",
+        "php-http/message": "^1.4"
     },
     "bin": [
         "bin/tanslala"

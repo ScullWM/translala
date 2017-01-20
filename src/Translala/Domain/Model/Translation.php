@@ -91,4 +91,12 @@ class Translation implements TranslationInterface
 
         return $array;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isEmpty()
+    {
+        return empty($this->getValue());
+    }
 }

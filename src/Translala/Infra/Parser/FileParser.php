@@ -4,8 +4,9 @@ namespace Translala\Infra\Parser;
 
 use Symfony\Component\Yaml\Yaml;
 use Translala\Domain\Model\Translation;
+use Translala\Domain\Parser\ParserInterface;
 
-class FileParser
+class FileParser implements ParserInterface
 {
     /**
      * @var string
@@ -79,9 +80,17 @@ class FileParser
                 $this->loadTranslationData($value, $prefix);
             } else {
                 $key = $prefix . '.' . $key;
-                $this->translations[] = new Translation($key, $value, $this->language, $this->domain);
+                $this->translations[$key] = new Translation($key, $value, $this->language, $this->domain);
             }
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getStrategyName()
+    {
+        return '%s.yml';
     }
 
     /**
