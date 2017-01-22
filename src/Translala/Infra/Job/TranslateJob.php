@@ -46,7 +46,7 @@ class TranslateJob
         // exit();
 
         foreach ($this->translationsFiles as $translationFile) {
-            foreach ($this->configFile->getLanguages() as $locale) {
+            foreach ($this->configFile->getOthersLanguages() as $locale) {
                 $this->translateFile($translationFile, $locale);
             }
         }
@@ -54,32 +54,27 @@ class TranslateJob
 
     /**
      * @param  TranslationFileInterface $translationFile
-     * @param  [type]                   $locale
-     * @return [type]
+     * @param  string                   $locale
      */
     private function translateFile(TranslationFileInterface $translationFile, $locale)
     {
-        $updatedTranslation = 0;
+        $countUpdatedTranslation = 0;
 
-        if ($translationFile->isMissingForLocale($locale)) {
-            $toTranslateFile = $translationFile->getTranslationFileForLocale($locale);
-        }
-
+        $toTranslateFile = $translationFile->getTranslationFileForLocale($locale);
         foreach ($translationFile->getTranslations() as $translation) {
-                var_dump($translationFile->getTranslations());
-                exit();
-            if ($translation->isEmpty()) {
+            if ($toTranslateFile->isTranslationEmpty($translation->getKey())) {
 
+                $translatedValue = $this->translationClient->translate($translation->getValue(), $translation->getLanguage(), $locale);
+                $updatedTranslation = clone($translation);
+                $updatedTranslation->setValue($translatedValue);
 
-                $this->translationClient->translate($translation->getValue(), $translation->getLanguage(), $locale);
-                $updatedTranslation++;
+                $toTranslateFile->updateTranslation($updatedTranslation);
+                $countUpdatedTranslation++;
             }
         }
 
-        if ($updatedTranslation > 0) {
-
-            var_dump($updatedTranslation);
-            exit();
+        if ($countUpdatedTranslation > 0) {
+            $toTranslateFile->dump();
         }
     }
 

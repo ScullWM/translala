@@ -69,6 +69,19 @@ class ConfigFile implements ConfigFileInterface
     }
 
     /**
+     * @return array
+     */
+    public function getOthersLanguages()
+    {
+        $allLanguages = $this->getLanguages();
+        if(($key = array_search($this->getMasterLocale(), $allLanguages)) !== false) {
+            unset($allLanguages[$key]);
+        }
+
+        return $allLanguages;
+    }
+
+    /**
      * @return string
      */
     public function getExportPath()

@@ -78,13 +78,12 @@ class Translation implements TranslationInterface
         return $this->domain;
     }
 
-
     /**
      * @return array
      */
     public function getKeypath()
     {
-        $array = [];
+        $array = (!empty($this->getValue())) ? $this->getValue() : '~';
         foreach (array_reverse(explode('.', $this->key)) as $arr) {
             $array = [$arr => $array];
         }
@@ -98,5 +97,15 @@ class Translation implements TranslationInterface
     public function isEmpty()
     {
         return empty($this->getValue());
+    }
+
+    /**
+     * @param string $value
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
     }
 }

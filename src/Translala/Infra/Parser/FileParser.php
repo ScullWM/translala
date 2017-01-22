@@ -63,24 +63,36 @@ class FileParser implements ParserInterface
         return $this->translations;
     }
 
-    public function dump($datas)
+    /**
+     * @param  array  $datas
+     * @param  string $path
+     */
+    public function dump(array $datas, $path)
     {
         $yamlParser  = new Yaml();
         $yamlContent = $yamlParser->dump($datas, 100);
+
+        file_put_contents($path, $yamlContent);
     }
 
     /**
      * @param  array $datas
      */
-    private function loadTranslationData($datas, $prefix = null)
+    private function loadTranslationData($datas, $prefix = null, $iteration = 0)
     {
         foreach ($datas as $key => $value) {
             if (is_array($value)) {
-                $prefix = trim($prefix . '.' . $key, '.');
-                $this->loadTranslationData($value, $prefix);
+                $tmpPrefix = trim($prefix . '.' . $key, '.');
+                $iteration++;
+                $this->loadTranslationData($value, $tmpPrefix, $iteration);
             } else {
-                $key = $prefix . '.' . $key;
-                $this->translations[$key] = new Translation($key, $value, $this->language, $this->domain);
+                $prefix = $prefix . '.' . $key;
+
+                $this->translations[$prefix] = new Translation($prefix, $value, $this->language, $this->domain);
+            }
+            if ($iteration == 0) {
+                $prefix = '';
+                $iteration = 0;
             }
         }
     }

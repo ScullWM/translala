@@ -36,8 +36,7 @@ class ProjectLoader implements LoaderInterface
 
         foreach ($translationPaths as $path) {
             foreach (glob($path . '*.' . $this->configFile->getMasterLocale() . '.yml') as $translationFile) {
-
-                $translationFileModel = new TranslationFile($translationFile, new FileParser($translationFile));
+                $translationFileModel = new TranslationFile($translationFile, new FileParser($translationFile), $this->configFile->getMasterLocale());
                 $translationFileModel->parse();
                 $this->translationsFiles[] = $translationFileModel;
             }

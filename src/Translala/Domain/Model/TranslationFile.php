@@ -88,7 +88,10 @@ class TranslationFile implements TranslationFileInterface
      */
     public function getTranslationFileForLocale($locale)
     {
-        return new TranslationFile($this->getPathForLocale($locale), $this->fileParser, $locale);
+        $translationFile = new TranslationFile($this->getPathForLocale($locale), $this->fileParser, $locale);
+        // $translationFile->parse();
+
+        return $translationFile;
     }
 
     /**
@@ -101,6 +104,32 @@ class TranslationFile implements TranslationFileInterface
             return true;
         }
 
-        return (bool) empty($this->translations[$key]);
+        return (bool) (empty($this->translations[$key]->getValue()));
+    }
+
+    /**
+     * Dump translation in new file
+     *
+     * @return null
+     */
+    public function dump()
+    {
+        $datas = [];
+        foreach ($this->translations as $translation) {
+            $datas = array_merge_recursive($translation->getKeypath(), $datas);
+        }
+
+        $this->fileParser->dump($datas, $this->getPath());
+    }
+
+    /**
+     * @param  TranslationInterface $translation
+     * @return this
+     */
+    public function updateTranslation(TranslationInterface $translation)
+    {
+        $this->translations[$translation->getKey()] = $translation;
+
+        return $this;
     }
 }
