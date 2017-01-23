@@ -86,15 +86,18 @@ class FileParser implements ParserInterface
                 $iteration++;
                 $this->loadTranslationData($value, $tmpPrefix, $iteration);
             } else {
-                $prefix = $prefix . '.' . $key;
+                $tmpPrefix = $prefix . '.' . $key;
 
-                $this->translations[$prefix] = new Translation($prefix, $value, $this->language, $this->domain);
+                $this->translations[$tmpPrefix] = new Translation($tmpPrefix, $value, $this->language, $this->domain);
             }
             if ($iteration == 0) {
                 $prefix = '';
                 $iteration = 0;
             }
         }
+
+        print_r(array_keys($this->translations));
+        // exit();
     }
 
     /**
