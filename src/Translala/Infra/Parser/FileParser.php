@@ -54,11 +54,18 @@ class FileParser implements ParserInterface
     /**
      * @return array<TranslationInterface>
      */
-    public function parse()
+    public function parse($filepath = null)
     {
+        $filepath = ($filepath) ? $filepath : $this->filepath;
+
         $yamlParser = new Yaml();
-        $datas = $yamlParser->parse(file_get_contents($this->filepath));
-        $this->loadTranslationData($datas);
+
+        if (file_exists($filepath)) {
+            $datas = $yamlParser->parse(file_get_contents($filepath));
+            $this->loadTranslationData($datas);
+        } else {
+            $this->translations = [];
+        }
 
         return $this->translations;
     }
@@ -95,9 +102,6 @@ class FileParser implements ParserInterface
                 $iteration = 0;
             }
         }
-
-        print_r(array_keys($this->translations));
-        // exit();
     }
 
     /**

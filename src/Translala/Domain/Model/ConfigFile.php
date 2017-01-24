@@ -69,6 +69,14 @@ class ConfigFile implements ConfigFileInterface
     }
 
     /**
+     * @return string
+     */
+    public function getProjectPath()
+    {
+        return $this->data[ConfigFileInterface::PROJECT_PATH];
+    }
+
+    /**
      * @return array
      */
     public function getOthersLanguages()

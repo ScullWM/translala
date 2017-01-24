@@ -9,6 +9,19 @@ interface ConfigFileInterface
     const LANGUAGES_KEY     = 'languages';
     const EXPORT_PATH_KEY   = 'export_path';
     const API_KEY           = 'api';
+    const PROJECT_PATH      = 'project_path';
 
     public function getFilepath();
+
+    public function getTranslationPaths();
+
+    public function getMasterLocale();
+
+    public function getLanguages();
+
+    public function getProjectPath();
+
+    public function getOthersLanguages();
+
+    public function getExportPath();
 }

@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+      <div class="starter-template">
+        <h1>Common translations</h1>
+
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>Repeat</th>
+                    <th>Translation</th>
+                    <th>Keys</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in listing %}
+                <tr>
+                    <td class="text-right">{{ item.counter }}</td>
+                    <td class="text-left">{{ item.translation }}</td>
+                    <td class="text-left">
+                        {% for ref in item.references %}
+                            {{ ref }}<br />
+                        {% endfor %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      </div>
+{% endblock %}

@@ -10,6 +10,9 @@ class Application extends BaseApplication
     {
         $commands = parent::getDefaultCommands();
         $commands[] = new \Translala\App\Command\TranslateCommand();
+        $commands[] = new \Translala\App\Command\CommonCommand();
+        $commands[] = new \Translala\App\Command\StatsCommand();
+        $commands[] = new \Translala\App\Command\DeadCommand();
 
         return $commands;
     }

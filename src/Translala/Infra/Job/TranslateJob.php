@@ -42,9 +42,6 @@ class TranslateJob
         $this->translationClient->addTranslatorService(new GoogleTranslator($apiKeys['google']));
         $masterLocale = $this->configFile->getMasterLocale();
 
-        // var_dump($this->translationsFiles, $this->configFile->getLanguages());
-        // exit();
-
         foreach ($this->translationsFiles as $translationFile) {
             foreach ($this->configFile->getOthersLanguages() as $locale) {
                 $this->translateFile($translationFile, $locale);

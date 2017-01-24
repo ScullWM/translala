@@ -63,7 +63,7 @@ class TranslationFile implements TranslationFileInterface
      */
     public function parse()
     {
-        $this->translations = $this->fileParser->parse();
+        $this->translations = $this->fileParser->parse($this->getPath());
     }
 
     /**
@@ -88,10 +88,7 @@ class TranslationFile implements TranslationFileInterface
      */
     public function getTranslationFileForLocale($locale)
     {
-        $translationFile = new TranslationFile($this->getPathForLocale($locale), $this->fileParser, $locale);
-        // $translationFile->parse();
-
-        return $translationFile;
+        return new TranslationFile($this->getPathForLocale($locale), new FileParser($this->getPathForLocale($locale)), $locale);
     }
 
     /**

@@ -58,4 +58,22 @@ class ProjectLoader implements LoaderInterface
     {
         return $this->configFile;
     }
+
+    /**
+     * @param  string $viewPath
+     * @param  array  $datas
+     */
+    public function render($viewPath, array $datas)
+    {
+        \Twig_Autoloader::register();
+        $loader = new \Twig_Loader_Filesystem(__DIR__.'/../Templates');
+        $twig = new \Twig_Environment($loader, array('cache' => false));
+
+        $initDatas = [
+            'config' => $this->configFile,
+        ];
+
+        $exportPath = str_replace('.twig', '', $this->configFile->getExportPath() . DIRECTORY_SEPARATOR . $viewPath);
+        file_put_contents($exportPath, $twig->render($viewPath, array_merge($initDatas, $datas)));
+    }
 }
