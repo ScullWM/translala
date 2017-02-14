@@ -1,11 +1,11 @@
 Translala
 ==================
 
-You new toolbox to manage translations of your projects.
-It provide command to translate your missing translation, detect commons translations, report translation stats and detect dead translation.
+You new toolbox to manage your projects translations.
+It provide commands to translate your missing translations, detect commons translations, report translations stats and detect dead translations.
 (First version work with yml file only)
 
-![](http://www.updemia.com/static/e/a/xl/5887cc5f5c697.png)
+![](http://www.updemia.com/static/e/b/xl/58a2f6843b6f1.png)
 
 ## Install
 Grab the translala.phar and move it to your bin.

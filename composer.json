@@ -1,5 +1,5 @@
 {
-    "name": "scullwm/translala",
+    "name": "translala/translala",
     "type": "library",
     "require": {
         "php": "^5.5|^7.0",
