@@ -4,12 +4,24 @@ namespace Translala\Domain\Model;
 
 class LocaleStats
 {
+    /**
+     * @var string
+     */
     private $locale;
 
+    /**
+     * @var array
+     */
     private $filespath = [];
 
+    /**
+     * @var integer
+     */
     private $totalTranslationsPerFilepath;
 
+    /**
+     * @var integer
+     */
     private $missingTranslationsPerFilepath;
 
     /**
@@ -21,8 +33,6 @@ class LocaleStats
     }
 
     /**
-     * Gets the value of locale.
-     *
      * @return string
      */
     public function getLocale()
@@ -31,8 +41,6 @@ class LocaleStats
     }
 
     /**
-     * Gets the value of filespath.
-     *
      * @return string
      */
     public function getFilespath()
@@ -53,7 +61,6 @@ class LocaleStats
     }
 
     /**
-     *
      * @return this
      */
     public function setTotalTranslationsPerFilepath($filepath, $total)
@@ -64,7 +71,6 @@ class LocaleStats
     }
 
     /**
-     *
      * @return this
      */
     public function setMissingTranslationsPerFilepath($filepath, $total)

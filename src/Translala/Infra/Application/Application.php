@@ -13,6 +13,7 @@ class Application extends BaseApplication
         $commands[] = new \Translala\App\Command\CommonCommand();
         $commands[] = new \Translala\App\Command\StatsCommand();
         $commands[] = new \Translala\App\Command\DeadCommand();
+        $commands[] = new \Translala\App\Command\HealthCommand();
 
         return $commands;
     }
