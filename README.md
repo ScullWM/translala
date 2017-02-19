@@ -9,6 +9,7 @@ Availables commands:
 - Stats command
 - Common command
 - Dead command
+- Health command
 - Translation command
 
 ![](http://www.updemia.com/static/e/b/xl/58a2f6843b6f1.png)
@@ -38,6 +39,12 @@ api:
     google: my_very_secret_api_key
 
 project_path: ./
+
+
+health:
+    fr: 100
+    en: 95
+    da: 70
 ```
 
 ## Stats command
@@ -58,6 +65,10 @@ Do you have a different translation key for each "save" buttons of your form? Wi
 This search each translations keys in your project to help you find dead key.
 ![](https://i.imgflip.com/11z8lt.jpg)
 
+## Health command
+`translala translala:health:status --config ./app/Resources/translations/.translation.yml`
+
+Check percentage of missing translation for each locale. Return an exit code if check fail. Made for CI process.
 
 ## Translation command
 `translala translala:project:translate --config ./app/Resources/translations/.translation.yml`
