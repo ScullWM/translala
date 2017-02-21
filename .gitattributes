@@ -1,0 +1,2 @@
+*.phar linguist-language=Php
+build/translala.phar linguist-vendored=false
