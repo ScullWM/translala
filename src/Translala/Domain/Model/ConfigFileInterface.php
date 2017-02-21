@@ -10,6 +10,7 @@ interface ConfigFileInterface
     const EXPORT_PATH_KEY   = 'export_path';
     const API_KEY           = 'api';
     const PROJECT_PATH      = 'project_path';
+    const PROJECT_DIRECTORY_MANAGEMENT = 'directory_management';
 
     public function getFilepath();
 

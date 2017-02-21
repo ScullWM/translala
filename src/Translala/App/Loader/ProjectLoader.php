@@ -36,8 +36,14 @@ class ProjectLoader implements LoaderInterface
     {
         $translationPaths = $this->configFile->getTranslationPaths();
 
+        if ($directoryManagement = $this->configFile->getDirectoryManagement()) {
+            $regex = $this->configFile->getMasterLocale() . DIRECTORY_SEPARATOR . '*.{yml,php,json}';
+        } else {
+            $regex = '*.' . $this->configFile->getMasterLocale() . '.{yml,php,json}';
+        }
+
         foreach ($translationPaths as $path) {
-            foreach (glob($path . '*.' . $this->configFile->getMasterLocale() . '.{yml,php,json}', GLOB_BRACE) as $translationFile) {
+            foreach (glob($path . $regex, GLOB_BRACE) as $translationFile) {
                 $translationFileModel = new TranslationFile($translationFile, $this->getFileParser($translationFile), $this->configFile->getMasterLocale());
                 $translationFileModel->parse();
                 $this->translationsFiles[] = $translationFileModel;

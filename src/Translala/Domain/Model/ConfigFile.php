@@ -77,6 +77,18 @@ class ConfigFile implements ConfigFileInterface
     }
 
     /**
+     * @return bool
+     */
+    public function getDirectoryManagement()
+    {
+        if (isset($this->data[ConfigFileInterface::PROJECT_DIRECTORY_MANAGEMENT])) {
+            return $this->data[ConfigFileInterface::PROJECT_DIRECTORY_MANAGEMENT];
+        }
+
+        return false;
+    }
+
+    /**
      * @return array
      */
     public function getOthersLanguages()
