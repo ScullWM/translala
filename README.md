@@ -2,16 +2,23 @@ Translala
 ==================
 
 Your new toolbox to manage your (Symfony/Laravel/Other) projects translations.
-It provide commands to translate your missing translations, detect commons translations, report translations stats and detect dead translations. (Manage Yml, Php and Json files translations)
+It provide commands to translate your missing translations, detect commons translations, report translations stats and detect dead translations.
+
+It can also be integrated in your CI process.
+
+![](http://www.updemia.com/static/e/b/xl/58a2f6843b6f1.png)
 
 Availables commands:
 - Stats command
 - Common command
 - Dead command
-- Health command
+- Health command (CI Process)
 - Translation command
 
-![](http://www.updemia.com/static/e/b/xl/58a2f6843b6f1.png)
+Availables Files format:
+ - Yaml
+ - Php
+ - Json
 
 ## Install
 Grab the translala.phar and move it to your bin.
@@ -30,8 +37,12 @@ languages:
     - en
     - fr
     - da
+
 paths:
     - ./app/Resources/translations/
+    - ./resources/lang/en/
+    - ./src/AcmeBundle/Resources/translations/
+
 export_path: /tmp
 
 api:
@@ -45,6 +56,14 @@ health:
     en: 95
     da: 70
 ```
+
+`master_language` is the locale of reference for your project.
+
+`languages` list of locales your project have to manage.
+
+`paths` are filepaths where your translations file are stored.
+
+`export_path` is the directory where Translala dump your reports
 
 ## Stats command
 `translala translala:project:stats --config ./app/Resources/translations/.translation.yml`
