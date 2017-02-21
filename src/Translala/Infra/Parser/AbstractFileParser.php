@@ -2,41 +2,39 @@
 
 namespace Translala\Infra\Parser;
 
-use Symfony\Component\Yaml\Yaml;
 use Translala\Domain\Model\Translation;
-use Translala\Domain\Parser\ParserInterface;
 
-class FileParser implements ParserInterface
+class AbstractFileParser
 {
     /**
      * @var string
      */
-    private $filepath;
+    protected $filepath;
 
     /**
      * @var string
      */
-    private $extension;
+    protected $extension;
 
     /**
      * @var language
      */
-    private $language;
+    protected $language;
 
     /**
      * @var string
      */
-    private $domain;
+    protected $domain;
 
     /**
      * @var array
      */
-    private $keypath;
+    protected $keypath;
 
     /**
      * @var array
      */
-    private $translations = [];
+    protected $translations = [];
 
     /**
      * @param string $filepath
@@ -52,40 +50,9 @@ class FileParser implements ParserInterface
     }
 
     /**
-     * @return array<TranslationInterface>
-     */
-    public function parse($filepath = null)
-    {
-        $filepath = ($filepath) ? $filepath : $this->filepath;
-
-        $yamlParser = new Yaml();
-
-        if (file_exists($filepath)) {
-            $datas = $yamlParser->parse(file_get_contents($filepath));
-            $this->loadTranslationData($datas);
-        } else {
-            $this->translations = [];
-        }
-
-        return $this->translations;
-    }
-
-    /**
-     * @param  array  $datas
-     * @param  string $path
-     */
-    public function dump(array $datas, $path)
-    {
-        $yamlParser  = new Yaml();
-        $yamlContent = $yamlParser->dump($datas, 100);
-
-        file_put_contents($path, $yamlContent);
-    }
-
-    /**
      * @param  array $datas
      */
-    private function loadTranslationData($datas, $prefix = null, $iteration = 0)
+    protected function loadTranslationData($datas, $prefix = null, $iteration = 0)
     {
         foreach ($datas as $key => $value) {
             if (is_array($value)) {
@@ -102,14 +69,6 @@ class FileParser implements ParserInterface
                 $iteration = 0;
             }
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getStrategyName()
-    {
-        return '%s.yml';
     }
 
     /**

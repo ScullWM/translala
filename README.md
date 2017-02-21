@@ -1,9 +1,8 @@
 Translala
 ==================
 
-You new toolbox to manage your projects translations.
-It provide commands to translate your missing translations, detect commons translations, report translations stats and detect dead translations.
-(First version work with yml file only)
+Your new toolbox to manage your (Symfony/Laravel/Other) projects translations.
+It provide commands to translate your missing translations, detect commons translations, report translations stats and detect dead translations. (Manage Yml, Php and Json files translations)
 
 Availables commands:
 - Stats command

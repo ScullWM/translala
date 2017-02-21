@@ -4,7 +4,7 @@ namespace Translala\Domain\Model;
 
 use Translala\Domain\Model\TranslationInterface;
 use Translala\Domain\Parser\ParserInterface;
-use Translala\Infra\Parser\FileParser;
+use Translala\Infra\Parser\YamlFileParser;
 
 class TranslationFile implements TranslationFileInterface
 {
@@ -13,6 +13,9 @@ class TranslationFile implements TranslationFileInterface
      */
     private $path;
 
+    /**
+     * @var FileParserInterface
+     */
     private $fileParser;
 
     /**
@@ -88,7 +91,10 @@ class TranslationFile implements TranslationFileInterface
      */
     public function getTranslationFileForLocale($locale)
     {
-        return new TranslationFile($this->getPathForLocale($locale), new FileParser($this->getPathForLocale($locale)), $locale);
+        $parserFqcn = get_class($this->fileParser);
+        $newParser = new $parserFqcn($this->getPathForLocale($locale));
+
+        return new TranslationFile($this->getPathForLocale($locale), $newParser, $locale);
     }
 
     /**

@@ -5,7 +5,9 @@ namespace Translala\App\Loader;
 use Translala\Domain\Model\CommandContext;
 use Translala\Domain\Model\ConfigFile;
 use Translala\Domain\Model\TranslationFile;
-use Translala\Infra\Parser\FileParser;
+use Translala\Infra\Parser\JsonFileParser;
+use Translala\Infra\Parser\PhpFileParser;
+use Translala\Infra\Parser\YamlFileParser;
 
 class ProjectLoader implements LoaderInterface
 {
@@ -35,12 +37,36 @@ class ProjectLoader implements LoaderInterface
         $translationPaths = $this->configFile->getTranslationPaths();
 
         foreach ($translationPaths as $path) {
-            foreach (glob($path . '*.' . $this->configFile->getMasterLocale() . '.yml') as $translationFile) {
-                $translationFileModel = new TranslationFile($translationFile, new FileParser($translationFile), $this->configFile->getMasterLocale());
+            foreach (glob($path . '*.' . $this->configFile->getMasterLocale() . '.{yml,php,json}', GLOB_BRACE) as $translationFile) {
+                $translationFileModel = new TranslationFile($translationFile, $this->getFileParser($translationFile), $this->configFile->getMasterLocale());
                 $translationFileModel->parse();
                 $this->translationsFiles[] = $translationFileModel;
             }
         }
+    }
+
+    /**
+     * @param  string $translationFilePath
+     * @return FileParserInterface
+     */
+    private function getFileParser($translationFilePath)
+    {
+        $fileInfo = pathinfo($translationFilePath);
+        switch ($fileInfo['extension']) {
+            case 'yml':
+                $fileParser = new YamlFileParser($translationFilePath);
+                break;
+
+            case 'php':
+                $fileParser = new PhpFileParser($translationFilePath);
+                break;
+
+            case 'json':
+                $fileParser = new JsonFileParser($translationFilePath);
+                break;
+        }
+
+        return $fileParser;
     }
 
     /**
