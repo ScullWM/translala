@@ -2,7 +2,7 @@
 
 namespace Translala\Domain\Model;
 
-class Project implements ProjectInteface
+class Project implements ProjectInterface
 {
     private $locales;
     private $configFile;
